@@ -4,10 +4,75 @@
     <Filter Include="Source">
       <UniqueIdentifier>{5c8ac907-7771-4ef7-8d37-275a07550eab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Rendering">
+      <UniqueIdentifier>{db4ee276-6e1c-414a-a91f-b5b69396dd81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Level">
+      <UniqueIdentifier>{c471782e-96e7-4851-abe3-3802928548e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\WorldObject">
+      <UniqueIdentifier>{1030f726-830f-41c6-85a1-37a044abc4f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Math">
+      <UniqueIdentifier>{fd2df2cb-ab0c-4ad7-8346-32482749e1ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Misc">
+      <UniqueIdentifier>{b56fe871-c194-4478-be1d-401f0841d850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Main.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="Source\Rendering\Renderer.cpp">
+      <Filter>Source\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Level\Level.cpp">
+      <Filter>Source\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WorldObject\WorldObject.cpp">
+      <Filter>Source\WorldObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Math.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Vector2.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WorldObject\Transform.cpp">
+      <Filter>Source\WorldObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Misc\PFSEngineString.cpp">
+      <Filter>Source\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WorldObject\Transformable.cpp">
+      <Filter>Source\WorldObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Rendering\Renderer.h">
+      <Filter>Source\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level\Level.h">
+      <Filter>Source\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WorldObject\WorldObject.h">
+      <Filter>Source\WorldObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Math.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Vector2.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\EngineDefines.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WorldObject\Transform.h">
+      <Filter>Source\WorldObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Misc\PFSEngineString.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WorldObject\Transformable.h">
+      <Filter>Source\WorldObject</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
