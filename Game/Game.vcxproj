@@ -105,7 +105,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main.lib;sfml-system-s.lib;sfml-graphics-s.lib;sfml-window-s.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;%(AdditionalDependencies);pfsengine3.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-main.lib;sfml-system-s.lib;sfml-graphics-s.lib;sfml-window-s.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;sfml-audio-s.lib	;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies);pfsengine3.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -140,7 +140,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-s-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;%(AdditionalDependencies);pfsengine3.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-s-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;sfml-audio-s-d.lib	;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies);pfsengine3.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

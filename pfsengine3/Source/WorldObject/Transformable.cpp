@@ -1,9 +1,38 @@
-#include "Transformable.h"
 #include <algorithm>
+#include "Transformable.h"
 // ----------------------------------------------------------------------------
 const PTransform& ITransformable::GetTransform() const
 {
 	return _transform;
+}
+// ----------------------------------------------------------------------------
+const PArray<ITransformable*>& ITransformable::GetChildren() const
+{
+	return _children;
+}
+// ----------------------------------------------------------------------------
+void ITransformable::AttachTo(ITransformable* parent)
+{
+	if (parent == nullptr)
+	{
+		return;
+	}
+
+	DettachFromParent();
+
+	parent->AddChild(this);
+	SetParent(parent);
+}
+// ----------------------------------------------------------------------------
+void ITransformable::DettachFromParent()
+{
+	if (_parent == nullptr)
+	{
+		return;
+	}
+
+	_parent->RemoveChild(this);
+	SetParent(nullptr);
 }
 // ----------------------------------------------------------------------------
 void ITransformable::SetTransform(const PTransform& transform)
@@ -21,23 +50,18 @@ ITransformable* ITransformable::GetParent() const
 	return _parent;
 }
 // ----------------------------------------------------------------------------
-std::vector<ITransformable*> ITransformable::GetChildren() const
-{
-	return _children;
-}
-// ----------------------------------------------------------------------------
 void ITransformable::AddChild(ITransformable* child)
 {
-	_children.push_back(child);
+	_children.Add(child);
 }
 // ----------------------------------------------------------------------------
 void ITransformable::RemoveChild(ITransformable* child)
 {
-	_children.erase(std::remove(_children.begin(), _children.end(), child), _children.end());
+	_children.Remove(child);
 }
 // ----------------------------------------------------------------------------
 void ITransformable::ClearChildren()
 {
-	_children.clear();
+	_children.Clear();
 }
 // ----------------------------------------------------------------------------

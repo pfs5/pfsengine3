@@ -12,6 +12,16 @@ PString::PString(const char* cstr):
 
 }
 // ----------------------------------------------------------------------------
+const char* PString::CStr() const
+{
+	return _cppstr.c_str();
+}
+// ----------------------------------------------------------------------------
+size_t PString::Size() const
+{
+	return _cppstr.size();
+}
+// ----------------------------------------------------------------------------
 PString PString::FromInt(int i)
 {
 	return PString(std::to_string(i));

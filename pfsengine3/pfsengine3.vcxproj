@@ -19,22 +19,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Container\Array.cpp" />
+    <ClCompile Include="Source\Container\PFSEngineColor.cpp" />
     <ClCompile Include="Source\Level\Level.cpp" />
     <ClCompile Include="Source\Math\Math.cpp" />
     <ClCompile Include="Source\Math\Vector2.cpp" />
+    <ClCompile Include="Source\MemoryManagement\ResourceManager.cpp" />
+    <ClCompile Include="Source\MemoryManagement\UniquePtr.cpp" />
+    <ClCompile Include="Source\Misc\Globals.cpp" />
     <ClCompile Include="Source\Misc\PFSEngineString.cpp" />
+    <ClCompile Include="Source\Rendering\PFSEngineWindow.cpp" />
     <ClCompile Include="Source\Rendering\Renderer.cpp" />
+    <ClCompile Include="Source\Rendering\RenderTarget.cpp" />
+    <ClCompile Include="Source\UI\Panel.cpp" />
+    <ClCompile Include="Source\UI\TreePanel.cpp" />
     <ClCompile Include="Source\WorldObject\Transform.cpp" />
     <ClCompile Include="Source\WorldObject\Transformable.cpp" />
     <ClCompile Include="Source\WorldObject\WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Container\Array.h" />
+    <ClInclude Include="Source\Container\PFSEngineColor.h" />
     <ClInclude Include="Source\Level\Level.h" />
     <ClInclude Include="Source\Math\EngineDefines.h" />
     <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Math\Vector2.h" />
+    <ClInclude Include="Source\MemoryManagement\ResourceManager.h" />
+    <ClInclude Include="Source\MemoryManagement\UniquePtr.h" />
+    <ClInclude Include="Source\Misc\Globals.h" />
     <ClInclude Include="Source\Misc\PFSEngineString.h" />
+    <ClInclude Include="Source\Rendering\PFSEngineWindow.h" />
     <ClInclude Include="Source\Rendering\Renderer.h" />
+    <ClInclude Include="Source\Rendering\RenderTarget.h" />
+    <ClInclude Include="Source\ThirdParty\json.h" />
+    <ClInclude Include="Source\UI\Panel.h" />
+    <ClInclude Include="Source\UI\TreePanel.h" />
+    <ClInclude Include="Source\WorldObject\Nameable.h" />
     <ClInclude Include="Source\WorldObject\Transform.h" />
     <ClInclude Include="Source\WorldObject\Transformable.h" />
     <ClInclude Include="Source\WorldObject\WorldObject.h" />
@@ -129,7 +149,7 @@
       <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\include;$(SolutionDir)pfsengine3\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +159,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-s-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-s-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;sfml-audio-s-d.lib	;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -172,7 +192,7 @@
       <PreprocessorDefinitions>SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\include;$(SolutionDir)pfsengine3\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -184,7 +204,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\SFML-2.5.1-x64\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main.lib;sfml-system-s.lib;sfml-graphics-s.lib;sfml-window-s.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-main.lib;sfml-system-s.lib;sfml-graphics-s.lib;sfml-window-s.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;sfml-audio-s.lib	;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

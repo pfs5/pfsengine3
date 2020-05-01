@@ -1,6 +1,6 @@
 #pragma once
-#include "EngineDefines.h"
 #include <math.h>
+#include "EngineDefines.h"
 // ----------------------------------------------------------------------------
 namespace PMath
 {
@@ -42,6 +42,21 @@ namespace PMath
 	 * Checks if value is zero, with tolerance.
 	 */
 	float IsNearlyZero(float value, float tolerance = KINDA_SMALL_NUMBER);
+
+	/**
+	 * Round to nearest integer
+	 */
+	int RoundToInt(float value);
+
+	/**
+	 * Returns floor (nearest smaller round number).
+	 */
+	float Floor(float value);
+
+	/**
+	 * Returns ceil (nearest larger round number).
+	 */
+	float Ceil(float value);
 };
 // ----------------------------------------------------------------------------
 template<typename T>
@@ -57,13 +72,13 @@ T PMath::Abs(const T& value)
 }
 // ----------------------------------------------------------------------------
 template<typename T>
-T Min(const T& v1, const T& v2)
+T PMath::Min(const T& v1, const T& v2)
 {
 	return (v1 <= v2) ? v1 : v2;
 }
 // ----------------------------------------------------------------------------
 template<typename T>
-T Max(const T& v1, const T& v2)
+T PMath::Max(const T& v1, const T& v2)
 {
 	return (v1 >= v2) ? v1 : v2;
 }

@@ -1,25 +1,33 @@
 #pragma once
+#include "Container/Array.h"
 #include "Transform.h"
-#include <vector>
 // ----------------------------------------------------------------------------
 class ITransformable
 {
 public:
+	virtual ~ITransformable() = default;
+
 	const PTransform& GetTransform() const;
 	void SetTransform(const PTransform& transform);
 
-	void SetParent(ITransformable* parent);
-	ITransformable* GetParent() const;
+	const PArray<ITransformable*>& GetChildren() const;
 
-	std::vector<ITransformable*> GetChildren() const;
-	void AddChild(ITransformable* child);
-	void RemoveChild(ITransformable* child);
-	void ClearChildren();
+	void AttachTo(ITransformable* parent);
+	void DettachFromParent();
 
 private:
 	PTransform _transform;
 
 	ITransformable* _parent = nullptr;
-	std::vector<ITransformable*> _children;
+	PArray<ITransformable*> _children;
+
+private:
+	void SetParent(ITransformable* parent);
+	ITransformable* GetParent() const;
+
+	void AddChild(ITransformable* child);
+	void RemoveChild(ITransformable* child);
+	void ClearChildren();
+
 };
 // ----------------------------------------------------------------------------

@@ -19,6 +19,21 @@
     <Filter Include="Source\Misc">
       <UniqueIdentifier>{b56fe871-c194-4478-be1d-401f0841d850}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{1b13cf87-4b63-4e66-9a74-e2d94db86f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\MemoryManagement">
+      <UniqueIdentifier>{03800e1c-d0ea-4528-91cf-a2e9065e8c29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Containers">
+      <UniqueIdentifier>{b59c954f-ad5f-4124-ad28-dd83a8d88f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Logging">
+      <UniqueIdentifier>{3cb0cee4-cbb8-467f-93ba-00c64faa73d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty">
+      <UniqueIdentifier>{ff7aff61-8738-404e-bb5c-c3ee203f709a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Rendering\Renderer.cpp">
@@ -44,6 +59,33 @@
     </ClCompile>
     <ClCompile Include="Source\WorldObject\Transformable.cpp">
       <Filter>Source\WorldObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Panel.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rendering\RenderTarget.cpp">
+      <Filter>Source\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rendering\PFSEngineWindow.cpp">
+      <Filter>Source\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MemoryManagement\UniquePtr.cpp">
+      <Filter>Source\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Container\Array.cpp">
+      <Filter>Source\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\TreePanel.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MemoryManagement\ResourceManager.cpp">
+      <Filter>Source\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Container\PFSEngineColor.cpp">
+      <Filter>Source\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Misc\Globals.cpp">
+      <Filter>Source\Misc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +114,39 @@
       <Filter>Source\Misc</Filter>
     </ClInclude>
     <ClInclude Include="Source\WorldObject\Transformable.h">
+      <Filter>Source\WorldObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\Panel.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rendering\RenderTarget.h">
+      <Filter>Source\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rendering\PFSEngineWindow.h">
+      <Filter>Source\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MemoryManagement\UniquePtr.h">
+      <Filter>Source\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Container\Array.h">
+      <Filter>Source\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\TreePanel.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MemoryManagement\ResourceManager.h">
+      <Filter>Source\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\json.h">
+      <Filter>Source\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Container\PFSEngineColor.h">
+      <Filter>Source\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Misc\Globals.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WorldObject\Nameable.h">
       <Filter>Source\WorldObject</Filter>
     </ClInclude>
   </ItemGroup>

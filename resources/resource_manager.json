@@ -1,0 +1,37 @@
+{
+	"fonts": [
+		{
+			"name": "FiraMono-Bold",
+			"path": "FiraMono-Bold.ttf"
+		},
+		{
+			"name": "FiraMono-Medium",
+			"path": "FiraMono-Medium.ttf"
+		},
+		{
+			"name": "FiraMono-Regular",
+			"path": "FiraMono-Regular.ttf"
+		},
+
+		{
+			"name": "Roboto-Bold",
+			"path": "Roboto-Bold.ttf"
+		},
+		{
+			"name": "Roboto-Regular",
+			"path": "Roboto-Regular.ttf"
+		}
+	],
+
+	"textures" : [
+
+	],
+
+	"sounds" : [
+		
+	],
+
+	"music" : [
+		
+	]
+}

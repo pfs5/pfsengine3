@@ -1,7 +1,8 @@
 #pragma once
 #include "EngineDefines.h"
+#include "Math.h"
+#include "Misc/PFSEngineString.h"
 #include "SFML/System/Vector2.hpp"
-#include "../Misc/PFSEngineString.h"
 // ----------------------------------------------------------------------------
 struct PVector2
 {
@@ -34,17 +35,17 @@ public:
 	/**
 	 * Equality operator.
 	 */
-	inline bool operator==(const PVector2& v);
+	inline bool operator==(const PVector2& v) const;
 
 	/**
 	 * Inequality operator.
 	 */
-	inline bool operator!=(const PVector2& v);
+	inline bool operator!=(const PVector2& v) const;
 
 	/**
 	 * Vector addition.
 	 */
-	inline PVector2 operator+(const PVector2& v);
+	inline PVector2 operator+(const PVector2& v) const;
 
 	/**
 	 * Vector addition.
@@ -54,7 +55,7 @@ public:
 	/**
 	 * Vector subtraction.
 	 */
-	inline PVector2 operator-(const PVector2& v);
+	inline PVector2 operator-(const PVector2& v) const;
 
 	/**
 	 * Vector subtraction.
@@ -64,7 +65,7 @@ public:
 	/**
 	 * Component-wise multiplication.
 	 */
-	inline PVector2 operator*(const PVector2& v);
+	inline PVector2 operator*(const PVector2& v) const;
 
 	/**
 	 * Component-wise multiplication.
@@ -74,7 +75,7 @@ public:
 	/**
 	 * Component-wise multiplication.
 	 */
-	inline PVector2 operator/(const PVector2& v);
+	inline PVector2 operator/(const PVector2& v) const;
 
 	/**
 	 * Component-wise multiplication.
@@ -84,7 +85,7 @@ public:
 	/**
 	 * Adds to all vector components.
 	 */
-	inline PVector2 operator+(float f);
+	inline PVector2 operator+(float f) const;
 
 	/**
 	 * Adds to all vector components.
@@ -94,7 +95,7 @@ public:
 	/**
 	 * Subtracts from all vector components.
 	 */
-	inline PVector2 operator-(float f);
+	inline PVector2 operator-(float f) const;
 
 	/**
 	 * Subtracts from all vector components.
@@ -104,7 +105,7 @@ public:
 	/**
 	 * Vector scaling (multiply each component by value).
 	 */
-	inline PVector2 operator*(float f);
+	inline PVector2 operator*(float f) const;
 
 	/**
 	 * Vector scaling (multiply each component by value).
@@ -114,7 +115,7 @@ public:
 	/**
 	 * Divides each component by value.
 	 */
-	inline PVector2 operator/(float f);
+	inline PVector2 operator/(float f) const;
 
 	/**
 	 * Divides each component by value.
@@ -127,6 +128,7 @@ public:
 	inline PVector2 operator-();
 
 	inline operator sf::Vector2f() const;
+	inline operator sf::Vector2i() const;
 
 public:
 	/**
@@ -187,17 +189,17 @@ PVector2 PVector2::operator=(const sf::Vector2f& v)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-bool PVector2::operator==(const PVector2& v)
+bool PVector2::operator==(const PVector2& v) const
 {
 	return (*this - v).IsNearlyZero();
 }
 // ----------------------------------------------------------------------------
-bool PVector2::operator!=(const PVector2& v)
+bool PVector2::operator!=(const PVector2& v) const
 {
 	return !(*this == v);
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator+(const PVector2& v)
+PVector2 PVector2::operator+(const PVector2& v) const
 {
 	return PVector2(X + v.X, Y + v.Y);
 }
@@ -210,7 +212,7 @@ PVector2 PVector2::operator+=(const PVector2& v)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator-(const PVector2& v)
+PVector2 PVector2::operator-(const PVector2& v) const
 {
 	return PVector2(X - v.X, Y - v.Y);
 }
@@ -223,7 +225,7 @@ PVector2 PVector2::operator-=(const PVector2& v)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator*(const PVector2& v)
+PVector2 PVector2::operator*(const PVector2& v) const
 {
 	return PVector2(X * v.X, Y * v.Y);
 }
@@ -236,7 +238,7 @@ PVector2 PVector2::operator*=(const PVector2& v)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator/(const PVector2& v)
+PVector2 PVector2::operator/(const PVector2& v) const
 {
 	return PVector2(X / v.X, Y / v.Y);
 }
@@ -249,7 +251,7 @@ PVector2 PVector2::operator/=(const PVector2& v)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator+(float f)
+PVector2 PVector2::operator+(float f) const
 {
 	return PVector2(X + f, Y + f);
 }
@@ -262,7 +264,7 @@ PVector2 PVector2::operator+=(float f)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator-(float f)
+PVector2 PVector2::operator-(float f) const
 {
 	return PVector2(X - f, Y - f);
 }
@@ -275,7 +277,7 @@ PVector2 PVector2::operator-=(float f)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator*(float f)
+PVector2 PVector2::operator*(float f) const
 {
 	return PVector2(X * f, Y * f);
 }
@@ -288,7 +290,7 @@ PVector2 PVector2::operator*=(float f)
 	return *this;
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::operator/(float f)
+PVector2 PVector2::operator/(float f) const
 {
 	return PVector2(X / f, Y / f);
 }
@@ -309,5 +311,10 @@ PVector2 PVector2::operator-()
 PVector2::operator sf::Vector2f() const
 {
 	return sf::Vector2f(X, Y);
+}
+// ----------------------------------------------------------------------------
+PVector2::operator sf::Vector2i() const
+{
+	return sf::Vector2i(PMath::RoundToInt(X), PMath::RoundToInt(Y));
 }
 // ----------------------------------------------------------------------------
