@@ -1,43 +1,63 @@
 #pragma once
+#include "Input/MouseEventListener.h"
 #include "Panel.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Text.hpp"
 // ----------------------------------------------------------------------------
-class ITransformable;
+class OWorldObject;
 // ----------------------------------------------------------------------------
 struct PTreeNodeVisual
 {
 	sf::Text NodeTextObj;
+	sf::RectangleShape NodeSelectObj;
+
 	int Row;
 	float RowSpacing;
 	float LevelSpacing;
+	sf::Color SelectedColor;
 
-	void Draw(PRenderTarget* renderTarget, int level, const PString& text, const PVector2& position);
+	void Draw(PRenderTarget* renderTarget, int level, const PString& text, const PVector2& position, bool selected);
 };
 // ----------------------------------------------------------------------------
+/**
+ * UI panel for showing object trees.
+ */
 class PTreePanel : public PPanel
 {
 public:
-	PTreePanel();
+	PTreePanel(PWindow* parentRenderWindow);
 
-	void SetTreeRoot(const ITransformable* root);
+	void SetTreeRoot(OWorldObject* root);
 	void SetTitle(const PString& title);
 
 // PPanel
 public:
 	virtual void Draw(PRenderTarget* renderTarget);
 
-	virtual void SetSize(const PVector2& size);
-	virtual const PVector2& GetSize() const;
-
+	virtual void InitSize(const PVector2& size) override;
 	virtual void SetPosition(const PVector2& pos);
-	virtual const PVector2& GetPosition() const;
+
+protected:
+	virtual void OnButtonClicked(int buttonId) override;
+	virtual void OnPanelClicked() override;
 
 private:
-	const ITransformable* _treeRoot;
+	static const float PADDING_LEFT;
+	static const float PADDING_RIGHT;
+	static const float PADDING_TOP;
 
-	PVector2 _size;
-	PVector2 _position;
+private:
+	struct PTreePanelButtonNode
+	{
+		int ButtonRow;
+		int ButtonTreeLevel;
+		OWorldObject* WorldObject;
+
+		bool Selected = false;
+	};
+
+private:
+	OWorldObject* _treeRoot;
 
 	sf::RectangleShape _headerRect;
 	sf::Text _headerText;
@@ -45,9 +65,12 @@ private:
 
 	PTreeNodeVisual _treeNodeVisual;
 
+	PArray<PTreePanelButtonNode> _buttonNodes;
+
 private:
 	void DrawTree(PRenderTarget* renderTarget);
-	void DrawTreeLevel(PRenderTarget* renderTarget, const ITransformable* root, int level = 0);
 
+	void InitButtons(OWorldObject* root);
+	void InitButtonsInternal(OWorldObject* root, int& row, int level = 0);
 };
 // ----------------------------------------------------------------------------

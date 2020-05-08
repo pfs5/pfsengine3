@@ -34,11 +34,11 @@
     <Filter Include="Source\ThirdParty">
       <UniqueIdentifier>{ff7aff61-8738-404e-bb5c-c3ee203f709a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{e5da5456-ab97-451f-bcb7-b8af3315f17a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Rendering\Renderer.cpp">
-      <Filter>Source\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Level\Level.cpp">
       <Filter>Source\Level</Filter>
     </ClCompile>
@@ -87,11 +87,20 @@
     <ClCompile Include="Source\Misc\Globals.cpp">
       <Filter>Source\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Input\InputManager.cpp">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Logging\DebugLog.cpp">
+      <Filter>Source\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Box.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Containers\QuadTree.cpp">
+      <Filter>Source\Containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Rendering\Renderer.h">
-      <Filter>Source\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Level\Level.h">
       <Filter>Source\Level</Filter>
     </ClInclude>
@@ -148,6 +157,21 @@
     </ClInclude>
     <ClInclude Include="Source\WorldObject\Nameable.h">
       <Filter>Source\WorldObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\InputManager.h">
+      <Filter>Source\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\MouseEventListener.h">
+      <Filter>Source\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Logging\DebugLog.h">
+      <Filter>Source\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Box.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Containers\QuadTree.h">
+      <Filter>Source\Containers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -91,3 +91,8 @@ void PWindow::Display()
 	_sfmlWindow->display();
 }
 // ----------------------------------------------------------------------------
+const sf::RenderWindow* PWindow::GetSFMLWindow() const
+{
+	return _sfmlWindow;
+}
+// ----------------------------------------------------------------------------

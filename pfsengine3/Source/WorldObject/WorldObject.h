@@ -11,6 +11,8 @@ public:
 	virtual void SetName(const PString& name) override;
 	virtual PString GetName() const  override;
 
+	const PArray<OWorldObject*> GetChildren() const;
+
 private:
 	PString _name;
 };

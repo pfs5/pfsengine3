@@ -1,6 +1,5 @@
 #pragma once
 #include "EngineDefines.h"
-#include "Math.h"
 #include "Misc/PFSEngineString.h"
 #include "SFML/System/Vector2.hpp"
 // ----------------------------------------------------------------------------
@@ -19,7 +18,9 @@ public:
 public:
 	PVector2(float x = 0.f, float y = 0.f);
 	PVector2(const PVector2& other);
+
 	PVector2(const sf::Vector2f& sfOther);
+	PVector2(const sf::Vector2i& sfOther);
 
 public:
 	/**
@@ -128,7 +129,7 @@ public:
 	inline PVector2 operator-();
 
 	inline operator sf::Vector2f() const;
-	inline operator sf::Vector2i() const;
+	operator sf::Vector2i() const;
 
 public:
 	/**
@@ -311,10 +312,5 @@ PVector2 PVector2::operator-()
 PVector2::operator sf::Vector2f() const
 {
 	return sf::Vector2f(X, Y);
-}
-// ----------------------------------------------------------------------------
-PVector2::operator sf::Vector2i() const
-{
-	return sf::Vector2i(PMath::RoundToInt(X), PMath::RoundToInt(Y));
 }
 // ----------------------------------------------------------------------------

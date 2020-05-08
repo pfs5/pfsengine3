@@ -39,9 +39,10 @@ public:
 	friend inline bool operator==(const PString& left, const PString& right);
 	friend inline bool operator!=(const PString& left, const PString& right);
 
-
 	inline operator sf::String() const;
 	inline operator std::string() const;
+
+	inline const char* operator*() const;
 
 private:
 	std::string _cppstr;
@@ -128,5 +129,10 @@ PString::operator sf::String() const
 PString::operator std::string() const
 {
 	return _cppstr;
+}
+// ----------------------------------------------------------------------------
+const char* PString::operator*() const
+{
+	return _cppstr.c_str();
 }
 // ----------------------------------------------------------------------------

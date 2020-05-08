@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include "Box.h"
 #include "EngineDefines.h"
 // ----------------------------------------------------------------------------
 namespace PMath
@@ -57,6 +58,11 @@ namespace PMath
 	 * Returns ceil (nearest larger round number).
 	 */
 	float Ceil(float value);
+
+	/**
+	 * Checks if point is contained in a box.
+	 */
+	bool IsPointContainedInBox(const PVector2& point, const PBox& box);
 };
 // ----------------------------------------------------------------------------
 template<typename T>

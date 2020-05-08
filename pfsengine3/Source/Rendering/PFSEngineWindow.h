@@ -28,7 +28,17 @@ public:
 	virtual void Draw(const sf::Drawable& drawable, const sf::RenderStates& states = sf::RenderStates::Default) override;
 	virtual void Display() override;
 
+	const sf::RenderWindow* GetSFMLWindow() const;
+
+public:
+	inline operator sf::RenderWindow&() const;
+
 private:
-	sf::RenderWindow *_sfmlWindow;
+	sf::RenderWindow* _sfmlWindow;
 };
+// ----------------------------------------------------------------------------
+PWindow::operator sf::RenderWindow&() const
+{
+	return *_sfmlWindow;
+}
 // ----------------------------------------------------------------------------

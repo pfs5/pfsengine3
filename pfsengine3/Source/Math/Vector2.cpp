@@ -27,6 +27,18 @@ PVector2::PVector2(const sf::Vector2f& sfOther):
 	
 }
 // ----------------------------------------------------------------------------
+PVector2::PVector2(const sf::Vector2i& sfOther):
+	X((float)sfOther.x),
+	Y((float)sfOther.y)
+{
+
+}
+// ----------------------------------------------------------------------------
+PVector2::operator sf::Vector2i() const
+{
+	return sf::Vector2i(PMath::RoundToInt(X), PMath::RoundToInt(Y));
+}
+// ----------------------------------------------------------------------------
 float PVector2::DotProduct(const PVector2& v1, const PVector2& v2)
 {
 	return v1.X * v2.X + v1.Y * v2.Y;

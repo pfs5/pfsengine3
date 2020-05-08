@@ -19,9 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Containers\QuadTree.cpp" />
     <ClCompile Include="Source\Container\Array.cpp" />
     <ClCompile Include="Source\Container\PFSEngineColor.cpp" />
+    <ClCompile Include="Source\Input\InputManager.cpp" />
     <ClCompile Include="Source\Level\Level.cpp" />
+    <ClCompile Include="Source\Logging\DebugLog.cpp" />
+    <ClCompile Include="Source\Math\Box.cpp" />
     <ClCompile Include="Source\Math\Math.cpp" />
     <ClCompile Include="Source\Math\Vector2.cpp" />
     <ClCompile Include="Source\MemoryManagement\ResourceManager.cpp" />
@@ -29,7 +33,6 @@
     <ClCompile Include="Source\Misc\Globals.cpp" />
     <ClCompile Include="Source\Misc\PFSEngineString.cpp" />
     <ClCompile Include="Source\Rendering\PFSEngineWindow.cpp" />
-    <ClCompile Include="Source\Rendering\Renderer.cpp" />
     <ClCompile Include="Source\Rendering\RenderTarget.cpp" />
     <ClCompile Include="Source\UI\Panel.cpp" />
     <ClCompile Include="Source\UI\TreePanel.cpp" />
@@ -38,9 +41,14 @@
     <ClCompile Include="Source\WorldObject\WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Containers\QuadTree.h" />
     <ClInclude Include="Source\Container\Array.h" />
     <ClInclude Include="Source\Container\PFSEngineColor.h" />
+    <ClInclude Include="Source\Input\InputManager.h" />
+    <ClInclude Include="Source\Input\MouseEventListener.h" />
     <ClInclude Include="Source\Level\Level.h" />
+    <ClInclude Include="Source\Logging\DebugLog.h" />
+    <ClInclude Include="Source\Math\Box.h" />
     <ClInclude Include="Source\Math\EngineDefines.h" />
     <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Math\Vector2.h" />
@@ -49,7 +57,6 @@
     <ClInclude Include="Source\Misc\Globals.h" />
     <ClInclude Include="Source\Misc\PFSEngineString.h" />
     <ClInclude Include="Source\Rendering\PFSEngineWindow.h" />
-    <ClInclude Include="Source\Rendering\Renderer.h" />
     <ClInclude Include="Source\Rendering\RenderTarget.h" />
     <ClInclude Include="Source\ThirdParty\json.h" />
     <ClInclude Include="Source\UI\Panel.h" />

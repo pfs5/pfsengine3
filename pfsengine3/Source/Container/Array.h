@@ -22,6 +22,7 @@ public:
 	PArray();
 	PArray(const std::initializer_list<T>& elements);
 	PArray(psize size);
+	PArray(const PArray<T>& other);
 	~PArray();
 
 	void Add(const T& element);
@@ -51,9 +52,9 @@ public:
 	bool RemoveAt(psize index);
 
 	/**
-	 * Removes all elements from array.
+	 * Removes all elements from array and initializes with capacity.
 	 */
-	void Clear();
+	void Clear(psize slack = 0);
 
 	/**
 	 * Find element in array by value and return index if success.
@@ -95,12 +96,18 @@ public:
 
 // Iterator interface
 public:
-	PArrayIterator begin() const	{ return _elements; }
-	PArrayIterator end() const		{ return _elements + _size; }
+	PArrayIterator begin() const	{ 
+		return _elements; 
+	}
+	PArrayIterator end() const		{ 
+		return _elements + _size; 
+	}
 
 public:
 	const T& operator[] (psize idx) const	{ return At(idx); }
 		  T& operator[] (psize idx)			{ return At(idx); }
+
+	PArray<T> operator=(const PArray<T>& other);
 
 private:
 	mutable T* _elements;
@@ -109,6 +116,11 @@ private:
 	psize _size;
 
 private:
+	/**
+	 * Copy from other array to this one.
+	 */
+	void CopyOther(const PArray<T>& other);
+
 	/**
 	 * Initialize empty of size.
 	 */
@@ -119,12 +131,19 @@ private:
 	 */
 	bool IncreaseReservedMemory(psize newSize) const;
 
+	/**
+	 * Clear all elements and memory.
+	 */
+	void ClearInternal();
+
 	psize GetNewCapacity() const;
 };
 // ----------------------------------------------------------------------------
 template <typename T>
 PArray<T>::PArray():
-	_size(0u)
+	_elements(nullptr),
+	_size(0u),
+	_capacity(0u)
 {
 
 }
@@ -150,9 +169,18 @@ PArray<T>::PArray(psize size):
 }
 // ----------------------------------------------------------------------------
 template <typename T>
+PArray<T>::PArray(const PArray<T>& other):
+	_size(0u),
+	_capacity(0u),
+	_elements(nullptr)
+{
+	CopyOther(other);
+}
+// ----------------------------------------------------------------------------
+template <typename T>
 PArray<T>::~PArray()
 {
-	Clear();
+	ClearInternal();
 }
 // ----------------------------------------------------------------------------
 template <typename T>
@@ -219,14 +247,14 @@ bool PArray<T>::RemoveAt(psize index)
 }
 // ----------------------------------------------------------------------------
 template <typename T>
-void PArray<T>::Clear()
+void PArray<T>::Clear(psize slack/* = 0*/)
 {
-	for (psize i = 0; i < Size(); ++i)
-	{
-		At(i).~T();
-	}
+	ClearInternal();
 
-	std::free(_elements);
+	_capacity = 0u;
+	_size = 0u;
+
+	Reserve(slack);
 }
 // ----------------------------------------------------------------------------
 template <typename T>
@@ -261,6 +289,26 @@ void PArray<T>::Reserve(psize size) const
 }
 // ----------------------------------------------------------------------------
 template <typename T>
+PArray<T> PArray<T>::operator=(const PArray<T>& other)
+{
+	ClearInternal();
+	_size = 0u;
+	_capacity = 0u;
+
+	CopyOther(other);
+}
+// ----------------------------------------------------------------------------
+template <typename T>
+void PArray<T>::CopyOther(const PArray<T>& other)
+{
+	Reserve(other.Size());
+	for (const T& e : other)
+	{
+		Add(e);
+	}
+}
+// ----------------------------------------------------------------------------
+template <typename T>
 void PArray<T>::InitEmpty(psize size) const
 {
 	Reserve(size);
@@ -289,13 +337,6 @@ bool PArray<T>::IncreaseReservedMemory(psize newSize) const
 	_capacity = newSize;
 
 	return true;
-}
-// ----------------------------------------------------------------------------
-template <typename T>
-psize PArray<T>::GetNewCapacity() const
-{
-	//return _capacity + 1u;
-	return PMath::Max(_capacity * 2u, 1u);
 }
 // ----------------------------------------------------------------------------
 template <typename T>
@@ -352,5 +393,25 @@ PString PArray<T>::ToString() const
 	}
 
 	return PString(sstream.str());
+}
+// ----------------------------------------------------------------------------
+template <typename T>
+psize PArray<T>::GetNewCapacity() const
+{
+	//return _capacity + 1u;
+	return PMath::Max(_capacity * 2u, 1u);
+}
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+template <typename T>
+void PArray<T>::ClearInternal()
+{
+	for (psize i = 0; i < Size(); ++i)
+	{
+		At(i).~T();
+	}
+
+	std::free(_elements);
+	_elements = nullptr;
 }
 // ----------------------------------------------------------------------------

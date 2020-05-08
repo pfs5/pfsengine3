@@ -31,3 +31,9 @@ float PMath::Ceil(float value)
 	return std::ceilf(value);
 }
 // ----------------------------------------------------------------------------
+bool PMath::IsPointContainedInBox(const PVector2& point, const PBox& box)
+{
+	return point.X >= box.Min.X && point.X <= box.Max.X &&
+		point.Y >= box.Min.Y && point.Y <= box.Max.Y;
+}
+// ----------------------------------------------------------------------------

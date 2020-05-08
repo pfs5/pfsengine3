@@ -1,18 +1,35 @@
+#include "Containers/QuadTree.h"
+#include "Input/InputManager.h"
+#include "Logging/DebugLog.h"
 #include "MemoryManagement/ResourceManager.h"
 #include "Rendering/RenderTarget.h"
 #include "TreePanel.h"
 #include "WorldObject/Nameable.h"
 #include "WorldObject/Transformable.h"
+#include "WorldObject/WorldObject.h"
 // ----------------------------------------------------------------------------
-void PTreeNodeVisual::Draw(PRenderTarget* renderTarget, int level, const PString& text, const PVector2& position)
+const float PTreePanel::PADDING_LEFT = 10.f;
+const float PTreePanel::PADDING_RIGHT = 10.f;
+const float PTreePanel::PADDING_TOP = 10.f;
+// ----------------------------------------------------------------------------
+void PTreeNodeVisual::Draw(PRenderTarget* renderTarget, int level, const PString& text, const PVector2& position, bool selected)
 {
+	NodeSelectObj.setFillColor(selected ? SelectedColor : sf::Color::Transparent);
+	NodeSelectObj.setPosition(position + PVector2(0.f, Row * RowSpacing));
+	renderTarget->Draw(NodeSelectObj);
+
 	NodeTextObj.setString(text);
 	NodeTextObj.setPosition(position + PVector2(level * LevelSpacing, Row * RowSpacing));
+	NodeTextObj.setStyle(selected ? sf::Text::Bold : sf::Text::Regular);
 	renderTarget->Draw(NodeTextObj);
 }
 // ----------------------------------------------------------------------------
-PTreePanel::PTreePanel()
+PTreePanel::PTreePanel(PWindow* parentRenderWindow):
+	PPanel(parentRenderWindow)
 {
+	PInput::RegisterMouseDownEventListener(this);
+	PInput::RegisterMouseUpEventListener(this);
+
 	_headerRect.setFillColor(PColor::FromHex(0x33373a));
 	_headerRect.setOutlineColor(PColor::FromHex(0x4a4b4f));
 	_headerRect.setOutlineThickness(2.f);
@@ -29,6 +46,9 @@ PTreePanel::PTreePanel()
 	_backgroundRect.setOutlineColor(PColor::FromHex(0x4a4b4f));
 	_backgroundRect.setOutlineThickness(2.f);
 
+	// Tree node visual
+	_treeNodeVisual.SelectedColor = PColor::FromHex(0x383e42);
+
 	_treeNodeVisual.NodeTextObj.setFont(*PResourceManager::GetInstance().GetFont("Roboto-Regular"));
 	_treeNodeVisual.NodeTextObj.setCharacterSize(12);
 	_treeNodeVisual.NodeTextObj.setFillColor(PColor::FromHex(0x8f9396));
@@ -36,9 +56,13 @@ PTreePanel::PTreePanel()
 	_treeNodeVisual.LevelSpacing = 10.f;
 }
 // ----------------------------------------------------------------------------
-void PTreePanel::SetTreeRoot(const ITransformable* root)
+void PTreePanel::SetTreeRoot(OWorldObject* root)
 {
 	_treeRoot = root;
+
+	// Init buttons
+	ClearButtons();
+	InitButtons(_treeRoot);
 }
 // ----------------------------------------------------------------------------
 void PTreePanel::SetTitle(const PString& title)
@@ -55,57 +79,98 @@ void PTreePanel::Draw(PRenderTarget* renderTarget)
 	DrawTree(renderTarget);
 }
 // ----------------------------------------------------------------------------
-void PTreePanel::SetSize(const PVector2& size)
+void PTreePanel::InitSize(const PVector2& size)
 {
-	_size = size;
+	PPanel::InitSize(size);
+
 	_headerRect.setSize(PVector2(size.X, _headerRect.getSize().y));
 	_backgroundRect.setSize(size);
-}
-// ----------------------------------------------------------------------------
-const PVector2& PTreePanel::GetSize() const
-{
-	return _size;
+	_treeNodeVisual.NodeSelectObj.setSize(PVector2(size.X - PADDING_LEFT - PADDING_RIGHT, 20.f));
 }
 // ----------------------------------------------------------------------------
 void PTreePanel::SetPosition(const PVector2& pos)
 {
-	_position = pos;
+	PPanel::SetPosition(pos);
 
 	_headerRect.setPosition(pos);
 	_headerText.setPosition(pos);
 	_backgroundRect.setPosition(pos);
 }
 // ----------------------------------------------------------------------------
-const PVector2& PTreePanel::GetPosition() const
+/*override*/
+void PTreePanel::OnButtonClicked(int buttonId)
 {
-	return _position;
+	PPanel::OnButtonClicked(buttonId);
+
+	// Ignore root
+	for (psize i = 1; i < _buttonNodes.Size(); ++i)
+	{
+		_buttonNodes[i].Selected = false;
+
+		if (i == buttonId)
+		{
+			_buttonNodes[i].Selected = true;
+		}
+	}
+}
+// ----------------------------------------------------------------------------
+/*override*/
+void PTreePanel::OnPanelClicked()
+{
+	PPanel::OnPanelClicked();
+
+	for (PTreePanelButtonNode& btn : _buttonNodes)
+	{
+		btn.Selected = false;
+	}
 }
 // ----------------------------------------------------------------------------
 void PTreePanel::DrawTree(PRenderTarget* renderTarget)
 {
 	_treeNodeVisual.Row = 0;
-	DrawTreeLevel(renderTarget, _treeRoot);
+	for (const PTreePanelButtonNode& node : _buttonNodes)
+	{
+		PString name("Error_Object_Null");
+		if (node.WorldObject != nullptr)
+		{
+			name = node.WorldObject->GetName();
+		}
+
+		_treeNodeVisual.Row = node.ButtonRow;
+		_treeNodeVisual.Draw(renderTarget, node.ButtonTreeLevel, name, GetPosition() + PVector2(PADDING_LEFT, PADDING_TOP), node.Selected);
+	}
 }
 // ----------------------------------------------------------------------------
-void PTreePanel::DrawTreeLevel(PRenderTarget* renderTarget, const ITransformable* root, int level /*= 0*/)
+void PTreePanel::InitButtons(OWorldObject* root)
+{
+	int row = 0;
+	InitButtonsInternal(root, row);
+}
+// ----------------------------------------------------------------------------
+void PTreePanel::InitButtonsInternal(OWorldObject* root, int& row, int level/* = 0*/)
 {
 	if (root == nullptr)
 	{
 		return;
 	}
 
-	PString name("Error_Name_Not_Found");
-	if (const INameable* nameable = dynamic_cast<const INameable*>(root))
-	{
-		name = nameable->GetName();
-	}
+	int buttonId = row;
 
-	_treeNodeVisual.Draw(renderTarget, level, name, _position + PVector2(10.f, 10.f));
-	_treeNodeVisual.Row++;
+	_buttonNodes.Add(PTreePanelButtonNode{ buttonId, level, root});
 
-	for (const ITransformable* child : root->GetChildren())
+	PVector2 panelSize = GetPanelBounds().GetSize();
+
+	PVector2 buttonMin = PVector2(PADDING_LEFT, PADDING_TOP + row * _treeNodeVisual.RowSpacing) +
+		GetPosition();
+	PVector2 buttonMax = buttonMin + PVector2(panelSize.X - PADDING_LEFT, _treeNodeVisual.RowSpacing);
+	PBox buttonBounds(buttonMin, buttonMax);
+
+	AddButton(buttonId, buttonBounds);
+
+	for (OWorldObject* child : root->GetChildren())
 	{
-		DrawTreeLevel(renderTarget, child, level + 1);
+		row++;
+		InitButtonsInternal(child, row, level + 1);
 	}
 }
 // ----------------------------------------------------------------------------
