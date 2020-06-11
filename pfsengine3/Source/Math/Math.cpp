@@ -1,5 +1,5 @@
-#include <cmath>
 #include "Math.h"
+#include <cmath>
 // ----------------------------------------------------------------------------
 float PMath::Sqrt(float value)
 {

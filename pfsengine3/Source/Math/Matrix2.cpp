@@ -1,6 +1,6 @@
-#include <cstring>
 #include "Math.h"
 #include "Matrix2.h"
+#include <cstring>
 // ----------------------------------------------------------------------------
 PMatrix2::PMatrix2(std::initializer_list<PVector2> rows)
 {

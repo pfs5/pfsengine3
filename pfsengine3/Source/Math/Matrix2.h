@@ -1,6 +1,6 @@
 #pragma once
-#include <initializer_list>
 #include "Vector2.h"
+#include <initializer_list>
 // ----------------------------------------------------------------------------
 class PMatrix2
 {

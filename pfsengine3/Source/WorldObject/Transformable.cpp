@@ -1,7 +1,7 @@
-#include <algorithm>
 #include "Container/Array.h"
 #include "Logging/DebugLog.h"
 #include "Transformable.h"
+#include <algorithm>
 // ----------------------------------------------------------------------------
 const int ITransformable::MAX_TREE_DEPTH = 20;
 // ----------------------------------------------------------------------------

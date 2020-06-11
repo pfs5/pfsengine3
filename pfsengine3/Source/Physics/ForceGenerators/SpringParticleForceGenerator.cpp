@@ -1,5 +1,5 @@
-#include "SpringParticleForceGenerator.h"
 #include "../Particle.h"
+#include "SpringParticleForceGenerator.h"
 // ----------------------------------------------------------------------------
 PSpringParticleForceGenerator::PSpringParticleForceGenerator(OParticle* anchor, float springConstant, float restLength):
 	PFixedSpringParticleForceGenerator(PVector2::ZeroVector, springConstant, restLength),

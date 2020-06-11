@@ -1,6 +1,6 @@
 #include "ObjectListeners.h"
-#include "WorldObjectManager.h"
 #include "WorldObject.h"
+#include "WorldObjectManager.h"
 // ----------------------------------------------------------------------------
 PWorldObjectManager& PWorldObjectManager::GetInstance()
 {

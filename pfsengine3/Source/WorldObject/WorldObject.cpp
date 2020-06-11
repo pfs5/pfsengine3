@@ -1,7 +1,7 @@
+#include "Logging/DebugLog.h"
 #include "Rendering/RenderTarget.h"
 #include "WorldObject.h"
 #include "WorldObjectManager.h"
-#include "Logging/DebugLog.h"
 // ----------------------------------------------------------------------------
 OWorldObject::OWorldObject(const PString& name /*= PString()*/):
 	_name(name)

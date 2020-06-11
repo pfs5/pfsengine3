@@ -1,6 +1,6 @@
-#include <fstream>
 #include "ResourceManager.h"
 #include "ThirdParty/json.h"
+#include <fstream>
 // ----------------------------------------------------------------------------
 const PString PResourceManager::RESOURCE_MANAGER_DATA	= "../resources/resource_manager.json";
 const PString PResourceManager::AUDIO_FOLDER			= "../resources/audio/";

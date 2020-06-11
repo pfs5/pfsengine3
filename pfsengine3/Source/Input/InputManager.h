@@ -1,7 +1,7 @@
 #pragma once
-#include <SFML/Window.hpp>
 #include "Container/Array.h"
 #include "Math/Vector2.h"
+#include <SFML/Window.hpp>
 // ----------------------------------------------------------------------------
 class IMouseDownEventListener;
 class IMouseUpEventListener;

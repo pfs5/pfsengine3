@@ -1,7 +1,7 @@
 #include "Container/PFSEngineColor.h"
 #include "InspectorPanel.h"
-#include "MemoryManagement/ResourceManager.h"
 #include "Math/Vector2.h"
+#include "MemoryManagement/ResourceManager.h"
 #include "Rendering/RenderTarget.h"
 #include "WorldObject/WorldObject.h"
 // ----------------------------------------------------------------------------

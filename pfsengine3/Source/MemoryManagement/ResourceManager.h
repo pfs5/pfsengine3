@@ -1,9 +1,9 @@
 #pragma once
 
-#include <map>
 #include "Misc/PFSEngineString.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <map>
 // ----------------------------------------------------------------------------
 /**
 	Manages all "heavy" external resources for the game and allows easy access by name using the singleton pattern.

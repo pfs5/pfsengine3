@@ -1,7 +1,7 @@
 #pragma once
+#include "SFML/System/String.hpp"
 #include <iostream>
 #include <string>
-#include "SFML/System/String.hpp"
 // ----------------------------------------------------------------------------
 /**
  * Wrapper class for strings.

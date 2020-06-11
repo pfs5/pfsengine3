@@ -1,10 +1,10 @@
 #include "Container/PFSEngineColor.h"
 #include "Debug/DebugRenderer.h"
 #include "FixedSpringParticleForceGenerator.h"
+#include "Logging/DebugLog.h"
 #include "Math/Math.h"
 #include "Physics/Particle.h"
 #include "Rendering/PFSEngineWindow.h"
-#include "Logging/DebugLog.h"
 // ----------------------------------------------------------------------------
 PFixedSpringParticleForceGenerator::PFixedSpringParticleForceGenerator(const PVector2& anchor, float springConstant, float restLength):
 	_anchor(anchor),

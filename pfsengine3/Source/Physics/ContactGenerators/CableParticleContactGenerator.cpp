@@ -1,7 +1,7 @@
 #include "../Particle.h"
 #include "CableParticleContactGenerator.h"
-#include "Math/Math.h"
 #include "Debug/DebugRenderer.h"
+#include "Math/Math.h"
 // ----------------------------------------------------------------------------
 PCableParticleContactGenerator::PCableParticleContactGenerator(OParticle* p1, OParticle* p2, float maxLength, float restitution/* = 1.f*/):
 	_particle1(p1),
