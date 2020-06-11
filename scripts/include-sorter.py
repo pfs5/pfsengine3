@@ -33,14 +33,24 @@ def sort_single_file(path):
         file.writelines(lines_post_inc)
 
     os.replace(path + '.tmp', path)
-
+# -----------------------------------------------------------------------------
+def sort_tree(root):
+    for subdir, dirs, files in os.walk(root):
+        for file in files:
+            filepath = subdir + os.sep + file
+            if filepath.endswith('.cpp') or filepath.endswith('.h'):
+                sort_single_file(filepath)
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Include sorter for .cpp / .h files.')
     parser.add_argument('--file', type=str, help='Sort a single file.')
+    parser.add_argument('--root', type=str, help='Sort all files starting from root')
     
     args = parser.parse_args()
     
     if (args.file is not None):
         sort_single_file(args.file)
+
+    if (args.root is not None):
+        sort_tree(args.root)
 # -----------------------------------------------------------------------------
