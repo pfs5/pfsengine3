@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "WorldObject/Nameable.h"
 #include "WorldObject/WorldObject.h"
+#include "WorldObject/WorldObjectManager.h"
 // ----------------------------------------------------------------------------
 PLevel::PLevel()
 {
@@ -9,7 +10,7 @@ PLevel::PLevel()
 // ----------------------------------------------------------------------------
 PLevel::~PLevel()
 {
-	delete _rootWorldObject;
+	PWorldObjectManager::GetInstance().DestroyWorldObject(_rootWorldObject);
 }
 // ----------------------------------------------------------------------------
 void PLevel::AttachObjectToRoot(OWorldObject* obj)
@@ -25,6 +26,16 @@ void PLevel::AttachObjectToRoot(OWorldObject* obj)
 OWorldObject* PLevel::GetRootObject() const
 {
 	return _rootWorldObject;
+}
+// ----------------------------------------------------------------------------
+void PLevel::Draw(PRenderTarget* renderTarget)
+{
+	DrawInternal(renderTarget, _rootWorldObject);
+}
+// ----------------------------------------------------------------------------
+void PLevel::Update(float deltaTime)
+{
+	UpdateInternal(deltaTime, _rootWorldObject);
 }
 // ----------------------------------------------------------------------------
 PString PLevel::DumpContent() const
@@ -57,6 +68,26 @@ void PLevel::DumpTreeLevel(PString& outDump, const ITransformable* root, int lev
 	for (const ITransformable* child : root->GetChildren())
 	{
 		DumpTreeLevel(outDump, child, level + 1);
+	}
+}
+// ----------------------------------------------------------------------------
+void PLevel::DrawInternal(PRenderTarget* renderTarget, OWorldObject* root)
+{
+	root->Draw(renderTarget);
+
+	for (OWorldObject* child : root->GetChildren())
+	{
+		DrawInternal(renderTarget, child);
+	}
+}
+// ----------------------------------------------------------------------------
+void PLevel::UpdateInternal(float deltaTime, OWorldObject* root)
+{
+	root->Update(deltaTime);
+
+	for (OWorldObject* child : root->GetChildren())
+	{
+		UpdateInternal(deltaTime, child);
 	}
 }
 // ----------------------------------------------------------------------------

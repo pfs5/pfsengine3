@@ -7,6 +7,7 @@
 #include "WorldObject/Nameable.h"
 #include "WorldObject/Transformable.h"
 #include "WorldObject/WorldObject.h"
+#include "WorldObject/WorldObjectManager.h"
 // ----------------------------------------------------------------------------
 const float PTreePanel::PADDING_LEFT = 10.f;
 const float PTreePanel::PADDING_RIGHT = 10.f;
@@ -19,7 +20,8 @@ void PTreeNodeVisual::Draw(PRenderTarget* renderTarget, int level, const PString
 	renderTarget->Draw(NodeSelectObj);
 
 	NodeTextObj.setString(text);
-	NodeTextObj.setPosition(position + PVector2(level * LevelSpacing, Row * RowSpacing));
+	NodeTextObj.setOrigin(0.f, NodeTextObj.getCharacterSize() * 0.5f);
+	NodeTextObj.setPosition(position + PVector2(level * LevelSpacing, (Row + 0.5f) * RowSpacing));
 	NodeTextObj.setStyle(selected ? sf::Text::Bold : sf::Text::Regular);
 	renderTarget->Draw(NodeTextObj);
 }
@@ -29,6 +31,7 @@ PTreePanel::PTreePanel(PWindow* parentRenderWindow):
 {
 	PInput::RegisterMouseDownEventListener(this);
 	PInput::RegisterMouseUpEventListener(this);
+	PWorldObjectManager::GetInstance().RegisterWorldObjectCreationListener(this);
 
 	_headerRect.setFillColor(PColor::FromHex(0x33373a));
 	_headerRect.setOutlineColor(PColor::FromHex(0x4a4b4f));
@@ -52,7 +55,7 @@ PTreePanel::PTreePanel(PWindow* parentRenderWindow):
 	_treeNodeVisual.NodeTextObj.setFont(*PResourceManager::GetInstance().GetFont("Roboto-Regular"));
 	_treeNodeVisual.NodeTextObj.setCharacterSize(12);
 	_treeNodeVisual.NodeTextObj.setFillColor(PColor::FromHex(0x8f9396));
-	_treeNodeVisual.RowSpacing = 20.f;
+	_treeNodeVisual.RowSpacing = 25.f;
 	_treeNodeVisual.LevelSpacing = 10.f;
 }
 // ----------------------------------------------------------------------------
@@ -70,6 +73,12 @@ void PTreePanel::SetTitle(const PString& title)
 	_headerText.setString(title);
 }
 // ----------------------------------------------------------------------------
+OWorldObject* PTreePanel::GetSelectedObject() const
+{
+	return _selectedObject;
+}
+// ----------------------------------------------------------------------------
+/*override*/
 void PTreePanel::Draw(PRenderTarget* renderTarget)
 {
 	renderTarget->Draw(_headerRect);
@@ -79,15 +88,17 @@ void PTreePanel::Draw(PRenderTarget* renderTarget)
 	DrawTree(renderTarget);
 }
 // ----------------------------------------------------------------------------
+/*override*/
 void PTreePanel::InitSize(const PVector2& size)
 {
 	PPanel::InitSize(size);
 
 	_headerRect.setSize(PVector2(size.X, _headerRect.getSize().y));
 	_backgroundRect.setSize(size);
-	_treeNodeVisual.NodeSelectObj.setSize(PVector2(size.X - PADDING_LEFT - PADDING_RIGHT, 20.f));
+	_treeNodeVisual.NodeSelectObj.setSize(PVector2(size.X - PADDING_LEFT - PADDING_RIGHT, _treeNodeVisual.RowSpacing));
 }
 // ----------------------------------------------------------------------------
+/*override*/
 void PTreePanel::SetPosition(const PVector2& pos)
 {
 	PPanel::SetPosition(pos);
@@ -102,6 +113,8 @@ void PTreePanel::OnButtonClicked(int buttonId)
 {
 	PPanel::OnButtonClicked(buttonId);
 
+	_selectedObject = nullptr;
+
 	// Ignore root
 	for (psize i = 1; i < _buttonNodes.Size(); ++i)
 	{
@@ -110,8 +123,26 @@ void PTreePanel::OnButtonClicked(int buttonId)
 		if (i == buttonId)
 		{
 			_buttonNodes[i].Selected = true;
+			_selectedObject = _buttonNodes[i].WorldObject;
 		}
 	}
+}
+// ----------------------------------------------------------------------------
+/*override*/
+void PTreePanel::OnWorldObjectCreated(OWorldObject* worldObject)
+{
+}
+// ----------------------------------------------------------------------------
+/*override*/
+void PTreePanel::OnWorldObjectDestroyed(OWorldObject* worldObject)
+{
+}
+// ----------------------------------------------------------------------------
+/*override*/
+void PTreePanel::OnWorldObjectParentChanged(OWorldObject* worldObject)
+{
+	ClearButtons();
+	InitButtons(_treeRoot);
 }
 // ----------------------------------------------------------------------------
 /*override*/
@@ -123,6 +154,15 @@ void PTreePanel::OnPanelClicked()
 	{
 		btn.Selected = false;
 	}
+
+	_selectedObject = nullptr;
+}
+// ----------------------------------------------------------------------------
+void PTreePanel::ClearButtons()
+{
+	PPanel::ClearButtons();
+
+	_buttonNodes.Clear(_buttonNodes.Size());
 }
 // ----------------------------------------------------------------------------
 void PTreePanel::DrawTree(PRenderTarget* renderTarget)

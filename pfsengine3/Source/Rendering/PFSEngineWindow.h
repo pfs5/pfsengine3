@@ -7,10 +7,14 @@
 struct PWindowParams
 {
 	PString Title;
+	unsigned int AntiAliasingLevel = 0;
 };
 // ----------------------------------------------------------------------------
 class PWindow : public PRenderTarget
 {
+public:
+	static PWindow* MainWindow;
+
 public:
 	PWindow(unsigned int width, unsigned int height, const PWindowParams& params = PWindowParams());
 	PWindow(unsigned int width, unsigned int height, PString title = PString());
@@ -20,8 +24,9 @@ public:
 	bool PollEvent(sf::Event& event);
 	void Close();
 
-	PVector2 GetSize();
+	PVector2 GetSize() const;
 	void SetPosition(const PVector2 pos);
+	bool IsPointInWindow(const PVector2& point) const;
 
 	// PRenderTarget
 	virtual void Clear(const PColor& clearColor = PColor(0, 0, 0, 255)) override;

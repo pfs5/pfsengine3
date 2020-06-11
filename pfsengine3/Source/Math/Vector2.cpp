@@ -39,6 +39,16 @@ PVector2::operator sf::Vector2i() const
 	return sf::Vector2i(PMath::RoundToInt(X), PMath::RoundToInt(Y));
 }
 // ----------------------------------------------------------------------------
+const float& PVector2::operator[](int col) const
+{
+	return col <= 0 ? X : Y;
+}
+// ----------------------------------------------------------------------------
+float& PVector2::operator[](int col)
+{
+	return col <= 0 ? X : Y;
+}
+// ----------------------------------------------------------------------------
 float PVector2::DotProduct(const PVector2& v1, const PVector2& v2)
 {
 	return v1.X * v2.X + v1.Y * v2.Y;
@@ -49,12 +59,29 @@ float PVector2::CrossProduct(const PVector2& v1, const PVector2& v2)
 	return v1.X * v2.Y + v1.Y * v2.X;
 }
 // ----------------------------------------------------------------------------
-float PVector2::Size()
+float PVector2::VectorAngle(const PVector2& v1, const PVector2& v2)
+{
+	float size1 = v1.Size();
+	if (PMath::IsNearlyZero(size1))
+	{
+		return 0.f;
+	}
+
+	float size2 = v2.Size();
+	if (PMath::IsNearlyZero(size2))
+	{
+		return 0.f;
+	}
+
+	return PMath::Acos(PVector2::DotProduct(v1, v2) / size1 / size2);
+}
+// ----------------------------------------------------------------------------
+float PVector2::Size() const
 {
 	return PMath::Sqrt(this->SizeSquared());
 }
 // ----------------------------------------------------------------------------
-float PVector2::SizeSquared()
+float PVector2::SizeSquared() const
 {
 	return DotProduct(*this, *this);
 }
@@ -70,19 +97,19 @@ void PVector2::Normalize()
 	operator/=(size);
 }
 // ----------------------------------------------------------------------------
-PVector2 PVector2::GetNormalized()
+PVector2 PVector2::GetNormalized() const
 {
 	PVector2 v(*this);
 	v.Normalize();
 	return v;
 }
 // ----------------------------------------------------------------------------
-bool PVector2::IsNearlyZero(float tolerance /*= KINDA_SMALL_NUMBER*/)
+bool PVector2::IsNearlyZero(float tolerance /*= KINDA_SMALL_NUMBER*/) const
 {
 	return PMath::IsNearlyZero(X) && PMath::IsNearlyZero(Y);
 }
 // ----------------------------------------------------------------------------
-PString PVector2::ToString()
+PString PVector2::ToString() const
 {
 	return PString::Printf("X: %.2f Y: %.2f", X, Y);
 }

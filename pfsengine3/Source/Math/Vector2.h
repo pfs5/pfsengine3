@@ -131,6 +131,14 @@ public:
 	inline operator sf::Vector2f() const;
 	operator sf::Vector2i() const;
 
+	/**
+	 * Get element at index.
+	 * 0 or < 0 gets X
+	 * 1 or > 1 gets Y
+	 */
+	const float& operator[](int col) const;
+	float& operator[](int col);
+
 public:
 	/**
 	 * Vector dot product.
@@ -142,16 +150,21 @@ public:
 	 */
 	static float CrossProduct(const PVector2& v1, const PVector2& v2);
 
+	/**
+	 * Calculates angle between vectors.
+	 */
+	static float VectorAngle(const PVector2& v1, const PVector2& v2);
+
 public:
 	/**
 	 * Returns the size of the vector.
 	 */
-	float Size();
+	float Size() const;
 
 	/**
 	 * Returns the squared size of the vector.
 	 */
-	float SizeSquared();
+	float SizeSquared() const;
 
 	/**
 	 * Normalizes the vector in place.
@@ -161,17 +174,17 @@ public:
 	/**
 	 * Return normalized version of the vector.
 	 */
-	PVector2 GetNormalized();
+	PVector2 GetNormalized() const;
 
 	/**
 	 * Checks if vector is zero with tolerance.
 	 */
-	bool IsNearlyZero(float tolerance = KINDA_SMALL_NUMBER);
+	bool IsNearlyZero(float tolerance = KINDA_SMALL_NUMBER) const;
 
 	/**
 	 * Returns string representation of vector.
 	 */
-	PString ToString();
+	PString ToString() const;
 };
 // ----------------------------------------------------------------------------
 PVector2 PVector2::operator=(const PVector2& v)

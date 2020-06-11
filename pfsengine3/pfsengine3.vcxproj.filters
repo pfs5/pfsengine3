@@ -37,6 +37,24 @@
     <Filter Include="Source\Input">
       <UniqueIdentifier>{e5da5456-ab97-451f-bcb7-b8af3315f17a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Reflection">
+      <UniqueIdentifier>{5c84519e-a05b-4d86-8d4f-80e325d0b2b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Physics">
+      <UniqueIdentifier>{25d58d79-ad91-4406-8f2c-21af43f242ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{f94ff7eb-b353-4f35-9d3c-ef4ec7e3eeb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Physics\ForceGenerators">
+      <UniqueIdentifier>{0ba4564b-29a7-43b1-8151-3e6233e77a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Debug">
+      <UniqueIdentifier>{10549de8-03ac-497f-a7da-35260fe78c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Physics\ContactGenerators">
+      <UniqueIdentifier>{d3b0a74e-733d-4a5f-b17a-8f050e0b9dda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Level\Level.cpp">
@@ -98,6 +116,48 @@
     </ClCompile>
     <ClCompile Include="Source\Containers\QuadTree.cpp">
       <Filter>Source\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Matrix2.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\InspectorPanel.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Reflection\Reflection.cpp">
+      <Filter>Source\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\Particle.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\PhysicsGlobals.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\ParticleWithLifetime.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WorldObject\WorldObjectManager.cpp">
+      <Filter>Source\WorldObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\PhysicsSystem.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\ForceGenerators\ParticleForceGeneratorRegistry.cpp">
+      <Filter>Source\Physics\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\ForceGenerators\FixedSpringParticleForceGenerator.cpp">
+      <Filter>Source\Physics\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Debug\DebugRenderer.cpp">
+      <Filter>Source\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\ForceGenerators\SpringParticleForceGenerator.cpp">
+      <Filter>Source\Physics\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\ContactGenerators\CableParticleContactGenerator.cpp">
+      <Filter>Source\Physics\ContactGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\ContactGenerators\RodParticleContactGenerator.cpp">
+      <Filter>Source\Physics\ContactGenerators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +232,63 @@
     </ClInclude>
     <ClInclude Include="Source\Containers\QuadTree.h">
       <Filter>Source\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Matrix2.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\InspectorPanel.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Reflection\Reflection.h">
+      <Filter>Source\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\Particle.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\PhysicsGlobals.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\EngineGlobals.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ParticleWithLifetime.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WorldObject\WorldObjectManager.h">
+      <Filter>Source\WorldObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\PhysicsSystem.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ForceGenerators\ParticleForceGenerator.h">
+      <Filter>Source\Physics\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ForceGenerators\ParticleForceGeneratorRegistry.h">
+      <Filter>Source\Physics\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ForceGenerators\FixedSpringParticleForceGenerator.h">
+      <Filter>Source\Physics\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Debug\DebugRenderer.h">
+      <Filter>Source\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WorldObject\ObjectListeners.h">
+      <Filter>Source\WorldObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ForceGenerators\SpringParticleForceGenerator.h">
+      <Filter>Source\Physics\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ContactGenerators\ParticleContactGenerator.h">
+      <Filter>Source\Physics\ContactGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\PhysicsShared.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ContactGenerators\CableParticleContactGenerator.h">
+      <Filter>Source\Physics\ContactGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\ContactGenerators\RodParticleContactGenerator.h">
+      <Filter>Source\Physics\ContactGenerators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include "Panel.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Text.hpp"
+#include "WorldObject/ObjectListeners.h"
 // ----------------------------------------------------------------------------
 class OWorldObject;
 // ----------------------------------------------------------------------------
@@ -22,7 +23,7 @@ struct PTreeNodeVisual
 /**
  * UI panel for showing object trees.
  */
-class PTreePanel : public PPanel
+class PTreePanel : public PPanel, IWorldObjectEventListener
 {
 public:
 	PTreePanel(PWindow* parentRenderWindow);
@@ -30,16 +31,25 @@ public:
 	void SetTreeRoot(OWorldObject* root);
 	void SetTitle(const PString& title);
 
+	OWorldObject* GetSelectedObject() const;
+
 // PPanel
 public:
-	virtual void Draw(PRenderTarget* renderTarget);
+	virtual void Draw(PRenderTarget* renderTarget) override;
 
 	virtual void InitSize(const PVector2& size) override;
-	virtual void SetPosition(const PVector2& pos);
+	virtual void SetPosition(const PVector2& pos) override;
 
 protected:
 	virtual void OnButtonClicked(int buttonId) override;
 	virtual void OnPanelClicked() override;
+	virtual void ClearButtons() override;
+
+// IWorldObjectEventListener
+public:
+	virtual void OnWorldObjectCreated(OWorldObject* worldObject) override;
+	virtual void OnWorldObjectDestroyed(OWorldObject* worldObject) override;
+	virtual void OnWorldObjectParentChanged(OWorldObject* worldObject) override;
 
 private:
 	static const float PADDING_LEFT;
@@ -66,6 +76,8 @@ private:
 	PTreeNodeVisual _treeNodeVisual;
 
 	PArray<PTreePanelButtonNode> _buttonNodes;
+
+	OWorldObject* _selectedObject;
 
 private:
 	void DrawTree(PRenderTarget* renderTarget);

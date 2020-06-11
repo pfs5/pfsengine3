@@ -33,7 +33,7 @@ protected:
 	const PWindow* GetParentWindow() const;
 	const PBox& GetPanelBounds() const;
 
-	void ClearButtons();
+	virtual void ClearButtons();
 	void AddButton(int buttonId, const PBox& buttonBounds);
 	virtual void OnButtonClicked(int buttonId);
 	virtual void OnPanelClicked();

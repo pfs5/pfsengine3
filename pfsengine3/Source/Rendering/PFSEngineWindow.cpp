@@ -1,8 +1,12 @@
 #include "PFSEngineWindow.h"
 // ----------------------------------------------------------------------------
+PWindow* PWindow::MainWindow = nullptr;
+// ----------------------------------------------------------------------------
 PWindow::PWindow(unsigned int width, unsigned int height, const PWindowParams& params/* = PWindowParams()*/)
 {
-	_sfmlWindow = new sf::RenderWindow(sf::VideoMode(width, height), params.Title);
+	sf::ContextSettings winSettings;
+	winSettings.antialiasingLevel = params.AntiAliasingLevel;
+	_sfmlWindow = new sf::RenderWindow(sf::VideoMode(width, height), params.Title, 7u, winSettings);
 }
 // ----------------------------------------------------------------------------
 PWindow::PWindow(unsigned int width, unsigned int height, PString title /*= PString()*/)
@@ -45,7 +49,7 @@ void PWindow::Close()
 	_sfmlWindow->close();
 }
 // ----------------------------------------------------------------------------
-PVector2 PWindow::GetSize()
+PVector2 PWindow::GetSize() const
 {
 	sf::Vector2u winSize = _sfmlWindow->getSize();
 	return PVector2((float)winSize.x, (float)winSize.y);
@@ -59,6 +63,13 @@ void PWindow::SetPosition(const PVector2 pos)
 	}
 
 	_sfmlWindow->setPosition(pos);
+}
+// ----------------------------------------------------------------------------
+bool PWindow::IsPointInWindow(const PVector2& point) const
+{
+	PVector2 size = GetSize();
+	return point.X >= 0.f && point.X <= size.X &&
+		point.Y >= 0.f && point.Y <= size.Y;
 }
 // ----------------------------------------------------------------------------
 void PWindow::Clear(const PColor& clearColor/* = PColor(0, 0, 0, 255)*/)

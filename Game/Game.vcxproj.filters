@@ -4,5 +4,27 @@
     <Filter Include="Source">
       <UniqueIdentifier>{7ecc4072-aa02-410c-bb07-4e3a14605c9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\WorldObjects">
+      <UniqueIdentifier>{5955fe38-f163-4e69-a308-4d4d71cb2bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Levels">
+      <UniqueIdentifier>{d3d618be-373e-4cb8-99e8-d33a5d7c516d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\WorldObjects\TestObject.h">
+      <Filter>Source\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Levels\ParticleSystemLevel.h">
+      <Filter>Source\Levels</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\WorldObjects\TestObject.cpp">
+      <Filter>Source\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Levels\ParticleSystemLevel.cpp">
+      <Filter>Source\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
